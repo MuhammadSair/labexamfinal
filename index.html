@@ -1,0 +1,29 @@
+you are taxed with building a backend API for a library management system,which
+will manage books, authors,borrowers, and borrowing processes. This system
+includes special constraints, and the interactions between entities must reflect
+real-world library management challenges Schema Requirements: Book:
+title(String,required) author(Reference to Author,required) isbn(String,unique,
+required) available_copies(Number,required,non-Negative) Additional
+constraints:if a book has been borrowed more than 10 times ,the available copies
+cannot exceed 100 Author: name (String,required)
+email(String,unique,required,must be a valid email)
+phone(String,unique,required,must be a valid phone number) Additional
+constraints:an author can have at most 5 books Borrower: name(String,required)
+borrowed_books(Array of References to Book) membersgipActive(Boolean,required)
+membershiptype(Enum:Standard,Platinum,required) Additional constraints: Premium
+borrower can borrow at most 10 books at a time while standard borrowers can
+borrow at most 5 books at a time API Routes: implement crud operations for each
+entity Book: implement operations to crud books .Ensure that the available
+copies are updated when a book is borrowed or returned Author: implement
+operations to crud authors.Ensure that an author cannot have more than 5 books
+at once Borrorwer: implement operations to crud borrowers.Ensure that the
+borrowing constraints are enforced Handling error: Handle edge cases such as
+Borrowing a book that is not available Borrowing a book when the borrower has
+reached the borrowing limit Business Rules: Borrower and Return mechanism:
+Decrease the available copies of a book when it is borrowed Increase the
+available copies of a book when it is returned Apply different borrowing
+constraints based on the membership type of the borrower Additional Constraints:
+implement a rule that prevents an author from being linked to more than 5 books
+at once ,provide an api route that returns a list of authors who have reached
+this limit implement a business rule that prevents bororwers from borrowing who
+have overdue books,even if they have active membership
