@@ -3,9 +3,45 @@ const Borrower = require("../models/Borrower");
 
 exports.createBook = async (req, res) => {
   try {
+    const { author } = req.body;
+
+    // Check if the author exists and count their books
+    const authorBooksCount = await Book.countDocuments({ author });
+    if (authorBooksCount >= 5) {
+      return res
+        .status(400)
+        .json({ error: "An author cannot have more than 5 books." });
+    }
+
     const book = new Book(req.body);
     await book.save();
     res.status(201).json(book);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+exports.updateBook = async (req, res) => {
+  try {
+    const { author } = req.body;
+
+    // If author is being updated, validate the new author
+    if (author) {
+      const authorBooksCount = await Book.countDocuments({ author });
+      if (authorBooksCount >= 5) {
+        return res
+          .status(400)
+          .json({ error: "An author cannot have more than 5 books." });
+      }
+    }
+
+    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+    res.status(200).json(book);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -19,6 +55,7 @@ exports.getBooks = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 exports.getBookById = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -28,19 +65,6 @@ exports.getBookById = async (req, res) => {
     res.status(200).send(book);
   } catch (error) {
     res.status(500).send(error);
-  }
-};
-exports.updateBook = async (req, res) => {
-  try {
-    const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (!book) {
-      return res.status(404).json({ error: "Book not found" });
-    }
-    res.status(200).json(book);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
   }
 };
 

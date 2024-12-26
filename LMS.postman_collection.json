@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "a5c5a39b-3a21-498f-8bb9-574576cbe6c4",
+		"name": "LMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29347212"
+	},
+	"item": [
+		{
+			"name": "Authors-Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/authors",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Books-Got",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Book 3\",\n  \"author\": \"676d5dc3de57ed34e268df5a\",  \n  \"isbn\": \"333\",\n  \"available_copies\": 5\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrowers-Get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/borrowers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"borrowers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BorrowerCreated",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Borrower 2\",\n  \"membershipActive\": true,\n  \"membershipType\": \"Standard\",\n  \"borrowed_books\": []  // Initially empty\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/borrowers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"borrowers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book-borrowed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bookId\": \"676d5f93bcd8ecd531c5c14a\",\n  \"borrowerId\": \"676d6065bcd8ecd531c5c151\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/books/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book-1-before-borrowed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book-1-after-borrowed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/books/676d5f93bcd8ecd531c5c14a",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"676d5f93bcd8ecd531c5c14a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrowing-Books-Restricted",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bookId\": \"676d6a4d2e3f84bc2859a89d\",  // Replace with Book 1's ObjectId\n  \"borrowerId\": \"676d6065bcd8ecd531c5c151\"  // Replace with Borrower 1's ObjectId\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/books/borrow",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"borrow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attempting to borrow with 0 copies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bookId\": \"676d5f93bcd8ecd531c5c14a\",  // Replace with Book 1's ObjectId\n  \"borrowerId\": \"676d6065bcd8ecd531c5c151\"  // Replace with Borrower 1's ObjectId\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/books/borrow",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"borrow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Author cannot have more than 5 books",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Book 105\",\n  \"author\": \"676d5dc3de57ed34e268df5a\",  // Replace with Author 2's ObjectId\n  \"isbn\": \"2221390\",\n  \"available_copies\": 4\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book returned",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/books/return",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books",
+						"return"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
