@@ -102,3 +102,39 @@ This project implements a Library Management System using **Node.js**, **Express
 
 I have provided the collection of postman that fulfill All test cases Effeciently providing an
 easy demonstration
+
+#### Testing Overview
+
+This project includes a system for managing authors, books, and borrowers. The API provides endpoints for CRUD operations and enforces business rules such as borrowing limits and book availability. Below is a list of all the routes tested in the API:
+
+##### Routes
+
+1. **GET `/api/authors`**  
+   Retrieves a list of all authors.
+
+2. **GET `/api/books`**  
+   Retrieves a list of all books with details such as title, author, ISBN, and available copies.
+
+3. **POST `/api/borrowers`**  
+   Creates a new borrower with details such as name, membership status, and borrowed books.
+
+4. **POST `/api/books`**  
+   Adds a new book to the collection with details such as title, author, ISBN, and available copies.
+
+5. **POST `/api/books/borrow`**  
+   Borrows a book for a borrower (requires book and borrower IDs).
+
+6. **GET `/api/borrowers`**  
+   Retrieves a list of all borrowers.
+
+7. **GET `/api/books/{bookId}`**  
+   Retrieves a specific book by its ID, including updated details after borrowing.
+
+8. **POST `/api/books/borrow`**  
+   Tries to borrow a book, with restrictions such as availability and limits on borrowing.
+
+9. **POST `/api/books`**  
+   Adds a new book to the collection. Ensures authors cannot have more than 5 books in the system.
+
+10. **GET `/api/books/return`**  
+    Simulates returning a borrowed book, updating the available copies.
