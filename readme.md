@@ -46,7 +46,7 @@ This project implements a Library Management System using **Node.js**, **Express
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   npx nodemon server.js
    ```
 3. Start MongoDB locally or use a MongoDB Atlas cluster.
 4. Update the MongoDB connection string in `server.js`:
@@ -57,7 +57,7 @@ This project implements a Library Management System using **Node.js**, **Express
    ```
 5. Start the server:
    ```bash
-   npm start
+   npx nodemon server.js
    ```
 6. The server will run on `http://localhost:3000`.
 
